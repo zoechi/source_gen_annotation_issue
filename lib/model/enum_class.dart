@@ -1,3 +1,0 @@
-class EnumClass {
-  const EnumClass();
-}

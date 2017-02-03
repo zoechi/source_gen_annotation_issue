@@ -12,8 +12,7 @@ class SourceClass {
     // TODO(zoechi): more exact type check.
     return classElement is ClassElement &&
         (classElement.allSupertypes
-            .any((interfaceType) => interfaceType.name == 'Serializable')) &&
-        !classElement.displayName.startsWith('_\$');
+            .any((interfaceType) => interfaceType.name == 'Serializable'));
   }
 
   final ClassElement element;
@@ -27,6 +26,9 @@ class SourceClass {
     final result = new StringBuffer();
 
     for (final f in fields) {
+      // throws when constantValue is null
+      print(f.type.element.metadata.first.constantValue.type.displayName);
+      print('====== SUCCEEDED =====');
       if (f.type.element.metadata
           .any((m) => m.constantValue?.type?.displayName == 'EnumClass')) {
         result.write('''
